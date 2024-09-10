@@ -70,3 +70,25 @@ Simply visit your project at [GPT Engineer](https://gptengineer.app/projects/167
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.gptengineer.app/tips-tricks/custom-domain/)
+
+## How to edit content after deployment
+
+After deploying your project, you can edit the content using the following methods:
+
+1. **Use GPT Engineer**: Visit your project on GPT Engineer and make changes through the interface. These changes will be automatically committed to your repository.
+
+2. **Edit locally and redeploy**: 
+   - Clone the repository to your local machine.
+   - Make the necessary changes using your preferred code editor.
+   - Commit and push the changes to the repository.
+   - Redeploy the project using the deployment method you initially used (e.g., GPT Engineer's Share -> Publish feature).
+
+3. **Use GitHub's web interface**: 
+   - Navigate to your project's repository on GitHub.
+   - Find the file you want to edit and click the pencil icon to edit it directly in the browser.
+   - Commit your changes.
+   - Redeploy the project or set up automatic deployments with your hosting provider.
+
+4. **Content Management System (CMS)**: If your project uses a headless CMS, you can edit content through the CMS interface without changing the code.
+
+Remember to always test your changes in a development environment before deploying to production.
