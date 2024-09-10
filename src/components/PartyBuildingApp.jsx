@@ -2,14 +2,20 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useNavigate } from 'react-router-dom';
 
 const PartyBuildingApp = () => {
+  const navigate = useNavigate();
   const partyMembers = [
-    { name: "张三", position: "党支部书记", contribution: "组织社区志愿服务20次" },
-    { name: "李四", position: "组织委员", contribution: "开展党史学习活动15场" },
-    { name: "王五", position: "宣传委员", contribution: "编写党建文章30篇" },
-    { name: "赵六", position: "纪检委员", contribution: "监督党员活动参与率提升15%" },
+    { id: 1, name: "张三", position: "党支部书记", contribution: "组织社区志愿服务20次" },
+    { id: 2, name: "李四", position: "组织委员", contribution: "开展党史学习活动15场" },
+    { id: 3, name: "王五", position: "宣传委员", contribution: "编写党建文章30篇" },
+    { id: 4, name: "赵六", position: "纪检委员", contribution: "监督党员活动参与率提升15%" },
   ];
+
+  const handleViewDetails = (memberId) => {
+    navigate(`/party-member/${memberId}`);
+  };
 
   return (
     <div>
@@ -26,14 +32,18 @@ const PartyBuildingApp = () => {
                   <TableHead>姓名</TableHead>
                   <TableHead>职位</TableHead>
                   <TableHead>突出贡献</TableHead>
+                  <TableHead>操作</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {partyMembers.map((member, index) => (
-                  <TableRow key={index}>
+                {partyMembers.map((member) => (
+                  <TableRow key={member.id}>
                     <TableCell>{member.name}</TableCell>
                     <TableCell>{member.position}</TableCell>
                     <TableCell>{member.contribution}</TableCell>
+                    <TableCell>
+                      <Button onClick={() => handleViewDetails(member.id)}>查看详情</Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
