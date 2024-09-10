@@ -1,94 +1,104 @@
-# Welcome to your GPT Engineer project
+# 社区管理系统
 
-## Project info
+## 项目信息
 
-**Project**: friendly-frontend-creator
+**项目**: friendly-frontend-creator
 
 **URL**: https://run.gptengineer.app/projects/1679d9ee-f969-455f-9264-ba7ebf6a4164/improve
 
-## How can I edit this code?
+## 如何编辑代码？
 
-There are several ways of editing your application.
+有几种方法可以编辑您的应用程序。
 
-**Use GPT Engineer**
+**使用 GPT Engineer**
 
-Simply visit the GPT Engineer project at [GPT Engineer](https://gptengineer.app/projects/1679d9ee-f969-455f-9264-ba7ebf6a4164/improve) and start prompting.
+只需访问 [GPT Engineer](https://gptengineer.app/projects/1679d9ee-f969-455f-9264-ba7ebf6a4164/improve) 项目页面并开始提示。
 
-Changes made via gptengineer.app will be committed automatically to this repo.
+通过 gptengineer.app 进行的更改将自动提交到此存储库。
 
-**Use your preferred IDE**
+**使用您喜欢的 IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in the GPT Engineer UI.
+如果您想使用自己的 IDE 在本地工作，您可以克隆此存储库并推送更改。推送的更改也会反映在 GPT Engineer UI 中。
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+唯一的要求是安装 Node.js 和 npm - [使用 nvm 安装](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Follow these steps:
+按照以下步骤操作：
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 步骤 1：使用项目的 Git URL 克隆存储库。
+git clone <您的_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 步骤 2：导航到项目目录。
+cd <您的_项目_名称>
 
-# Step 3: Install the necessary dependencies.
+# 步骤 3：安装必要的依赖项。
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 步骤 4：启动带有自动重新加载和即时预览的开发服务器。
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+**直接在 GitHub 中编辑文件**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- 导航到所需的文件。
+- 点击文件视图右上角的"编辑"按钮（铅笔图标）。
+- 进行更改并提交更改。
 
-**Use GitHub Codespaces**
+**使用 GitHub Codespaces**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- 导航到您存储库的主页。
+- 点击右上角附近的"Code"按钮（绿色按钮）。
+- 选择"Codespaces"标签。
+- 点击"New codespace"以启动新的 Codespace 环境。
+- 直接在 Codespace 中编辑文件，完成后提交并推送更改。
 
-## What technologies are used for this project?
+## 本项目使用了哪些技术？
 
-This project is built with .
+本项目使用以下技术构建：
 
 - Vite
 - React
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## 如何部署这个项目？
 
-All GPT Engineer projects can be deployed directly via the GPT Engineer app.
+您可以使用 Netlify 轻松部署此项目。以下是步骤：
 
-Simply visit your project at [GPT Engineer](https://gptengineer.app/projects/1679d9ee-f969-455f-9264-ba7ebf6a4164/improve) and click on Share -> Publish.
+1. 在 [Netlify](https://www.netlify.com/) 上创建一个账户（如果您还没有的话）。
 
-## I want to use a custom domain - is that possible?
+2. 点击 "New site from Git"。
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.gptengineer.app/tips-tricks/custom-domain/)
+3. 选择您的 Git 提供商（GitHub、GitLab 或 Bitbucket）并授权 Netlify 访问您的存储库。
 
-## How to edit content after deployment
+4. 选择包含您项目的存储库。
 
-After deploying your project, you can edit the content using the following methods:
+5. 在构建设置中：
+   - 构建命令：`npm run build`
+   - 发布目录：`dist`
 
-1. **Use GPT Engineer**: Visit your project on GPT Engineer and make changes through the interface. These changes will be automatically committed to your repository.
+6. 点击 "Deploy site"。
 
-2. **Edit locally and redeploy**: 
-   - Clone the repository to your local machine.
-   - Make the necessary changes using your preferred code editor.
-   - Commit and push the changes to the repository.
-   - Redeploy the project using the deployment method you initially used (e.g., GPT Engineer's Share -> Publish feature).
+Netlify 将自动检测 `netlify.toml` 文件并使用其中的设置。
 
-3. **Use GitHub's web interface**: 
-   - Navigate to your project's repository on GitHub.
-   - Find the file you want to edit and click the pencil icon to edit it directly in the browser.
-   - Commit your changes.
-   - Redeploy the project or set up automatic deployments with your hosting provider.
+每次您推送到主分支时，Netlify 都会自动重新部署您的站点。
 
-4. **Content Management System (CMS)**: If your project uses a headless CMS, you can edit content through the CMS interface without changing the code.
+## 如何在部署后编辑内容
 
-Remember to always test your changes in a development environment before deploying to production.
+部署项目后，您可以使用以下方法编辑内容：
+
+1. **本地编辑并重新部署**：
+   - 克隆存储库到本地机器。
+   - 使用您喜欢的代码编辑器进行必要的更改。
+   - 提交并推送更改到存储库。
+   - Netlify 将自动检测更改并重新部署项目。
+
+2. **使用 GitHub 的 Web 界面**：
+   - 导航到您项目的 GitHub 存储库。
+   - 找到您想要编辑的文件并点击铅笔图标进行直接在浏览器中编辑。
+   - 提交您的更改。
+   - Netlify 将自动检测更改并重新部署项目。
+
+3. **内容管理系统（CMS）**：如果您的项目使用无头 CMS，您可以通过 CMS 界面编辑内容，而无需更改代码。
+
+请记住，在部署到生产环境之前，始终在开发环境中测试您的更改。
