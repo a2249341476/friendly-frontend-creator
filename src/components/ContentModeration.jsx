@@ -9,7 +9,6 @@ const ContentModeration = () => {
     { id: 1, content: "评论1", application: "邻里达人", status: "待审核" },
     { id: 2, content: "评论2", application: "幸福学堂", status: "待审核" },
     { id: 3, content: "评论3", application: "活动报名", status: "待审核" },
-    { id: 3, content: "评论3", application: "烧批少司缘", status: "待审核" },
   ]);
 
   const handleModeration = (id, action) => {
