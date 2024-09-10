@@ -1,8 +1,16 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const PartyBuildingApp = () => {
+  const partyMembers = [
+    { name: "张三", position: "党支部书记", contribution: "组织社区志愿服务20次" },
+    { name: "李四", position: "组织委员", contribution: "开展党史学习活动15场" },
+    { name: "王五", position: "宣传委员", contribution: "编写党建文章30篇" },
+    { name: "赵六", position: "纪检委员", contribution: "监督党员活动参与率提升15%" },
+  ];
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">云党建应用</h2>
@@ -12,8 +20,24 @@ const PartyBuildingApp = () => {
             <CardTitle>党员风采</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>展示党员信息和组织结构</p>
-            <Button className="mt-2">查看详情</Button>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>姓名</TableHead>
+                  <TableHead>职位</TableHead>
+                  <TableHead>突出贡献</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {partyMembers.map((member, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{member.name}</TableCell>
+                    <TableCell>{member.position}</TableCell>
+                    <TableCell>{member.contribution}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </CardContent>
         </Card>
         <Card>
