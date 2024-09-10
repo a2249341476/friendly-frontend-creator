@@ -50,7 +50,6 @@ const EventManagement = () => {
         </CardContent>
       </Card>
       <div className="mt-4">
-        <p>这里应该有一个拖拽界面来配置多流程节点，但由于复杂度限制，我们只展示了基本的表单。</p>
       </div>
     </div>
   );
