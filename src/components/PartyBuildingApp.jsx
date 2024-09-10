@@ -13,8 +13,8 @@ const PartyBuildingApp = () => {
     { id: 4, name: "赵六", position: "纪检委员", contribution: "监督党员活动参与率提升15%" },
   ];
 
-  const handleViewDetails = (memberId) => {
-    navigate(`/party-member/${memberId}`);
+  const handleViewDetails = () => {
+    navigate('/party-members');
   };
 
   return (
@@ -32,7 +32,6 @@ const PartyBuildingApp = () => {
                   <TableHead>姓名</TableHead>
                   <TableHead>职位</TableHead>
                   <TableHead>突出贡献</TableHead>
-                  <TableHead>操作</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -41,13 +40,11 @@ const PartyBuildingApp = () => {
                     <TableCell>{member.name}</TableCell>
                     <TableCell>{member.position}</TableCell>
                     <TableCell>{member.contribution}</TableCell>
-                    <TableCell>
-                      <Button onClick={() => handleViewDetails(member.id)}>查看详情</Button>
-                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+            <Button onClick={handleViewDetails} className="mt-4">查看详情</Button>
           </CardContent>
         </Card>
         <Card>
