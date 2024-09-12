@@ -1,20 +1,21 @@
-// 模拟数据库服务
-let events = [];
+import axios from 'axios';
 
-export const saveEvent = (event) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const newEvent = { ...event, id: Date.now() };
-      events.push(newEvent);
-      resolve(newEvent);
-    }, 500); // 模拟网络延迟
-  });
+const API_BASE_URL = 'http://your-backend-api-url.com/api';
+
+export const saveEvent = async (event) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/events`, event);
+    return response.data;
+  } catch (error) {
+    throw new Error('保存事件失败');
+  }
 };
 
-export const getEvents = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([...events]);
-    }, 500);
-  });
+export const getEvents = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/events`);
+    return response.data;
+  } catch (error) {
+    throw new Error('获取事件列表失败');
+  }
 };
