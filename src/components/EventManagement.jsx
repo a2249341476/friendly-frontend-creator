@@ -13,7 +13,18 @@ const EventManagement = () => {
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
+  // 处理保存事件流程的函数
   const handleSave = async () => {
+    // 输入验证
+    if (!eventName || !eventScope || !timeLimit || !reminderTime) {
+      toast({
+        title: "输入无效",
+        description: "请填写所有字段。",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSaving(true);
     try {
       const eventData = { eventName, eventScope, timeLimit, reminderTime };
