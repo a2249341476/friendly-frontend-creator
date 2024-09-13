@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { saveEvent, getEvents } from '../services/eventService';
 import { useToast } from "@/components/ui/use-toast";
 
 const EventManagement = () => {
-  const [flowName, setFlowName] = useState('');
-  const [flowScope, setFlowScope] = useState('');
+  const [eventName, setEventName] = useState('');
+  const [eventScope, setEventScope] = useState('');
   const [timeLimit, setTimeLimit] = useState('');
   const [reminderTime, setReminderTime] = useState('');
   const [isSaving, setIsSaving] = useState(false);
-  const [flows, setFlows] = useState([]);
+  const [events, setEvents] = useState([]); // 新增用于存储事件列表的 state
   const { toast } = useToast();
 
+  // 处理保存事件流程的函数
   const handleSave = async () => {
-    if (!flowName || !flowScope || !timeLimit || !reminderTime) {
+    if (!eventName || !eventScope || !timeLimit || !reminderTime) {
       toast({
         title: "输入无效",
         description: "请填写所有字段。",
@@ -25,24 +27,17 @@ const EventManagement = () => {
 
     setIsSaving(true);
     try {
-      // 模拟API调用
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      const newFlow = {
-        flow_name: flowName,
-        flow_scope: flowScope,
-        process_time_limit: parseInt(timeLimit),
-        node_delay_time: parseInt(reminderTime),
-      };
-      setFlows([...flows, newFlow]);
-
+      const eventData = { eventName, eventScope, timeLimit, reminderTime };
+      await saveEvent(eventData);
       toast({
         title: "保存成功",
-        description: "事件处置流程已成功保存。",
+        description: "事件处置流程已成功保存到数据库。",
       });
-      setFlowName('');
-      setFlowScope('');
+      setEventName('');
+      setEventScope('');
       setTimeLimit('');
       setReminderTime('');
+      fetchEvents(); // 保存后重新加载事件列表
     } catch (error) {
       toast({
         title: "保存失败",
@@ -51,6 +46,20 @@ const EventManagement = () => {
       });
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  // 新增用于获取事件列表的函数
+  const fetchEvents = async () => {
+    try {
+      const eventsData = await getEvents();
+      setEvents(eventsData.data); // 假设后端返回的是 { data: [...] } 格式
+    } catch (error) {
+      toast({
+        title: "获取失败",
+        description: "获取事件列表时出错，请稍后重试。",
+        variant: "destructive",
+      });
     }
   };
 
@@ -65,13 +74,13 @@ const EventManagement = () => {
           <div className="space-y-4">
             <Input
               placeholder="流程名称"
-              value={flowName}
-              onChange={(e) => setFlowName(e.target.value)}
+              value={eventName}
+              onChange={(e) => setEventName(e.target.value)}
             />
             <Input
               placeholder="事件流转范围"
-              value={flowScope}
-              onChange={(e) => setFlowScope(e.target.value)}
+              value={eventScope}
+              onChange={(e) => setEventScope(e.target.value)}
             />
             <Input
               placeholder="事件整体处置时限（小时）"
@@ -92,15 +101,21 @@ const EventManagement = () => {
         </CardContent>
       </Card>
 
+      {/* 新增查看数据按钮 */}
+      <Button onClick={fetchEvents} className="mt-4">
+        查看存储的数据
+      </Button>
+
+      {/* 展示从数据库获取的数据 */}
       <div className="mt-4">
         <h3 className="text-lg font-semibold">事件列表</h3>
         <ul>
-          {flows.length === 0 ? (
+          {events.length === 0 ? (
             <li>暂无数据</li>
           ) : (
-            flows.map((flow, index) => (
-              <li key={index} className="mb-2">
-                {flow.flow_name} - {flow.flow_scope} - {flow.process_time_limit}小时 - {flow.node_delay_time}小时
+            events.map((event, index) => (
+              <li key={index}>
+                {event.process_name} - {event.transfer_scope} - {event.process_deadline_hours}小时 - {event.reminder_duration_hours}小时
               </li>
             ))
           )}

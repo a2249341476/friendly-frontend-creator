@@ -1,18 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import EventManagement from './components/EventManagement';
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import AdminDashboard from "./pages/AdminDashboard";
+import Index from "./pages/Index";
+import PartyMemberDetails from "./components/PartyMemberDetails";
 
-function App() {
-  return (
-    <Router>
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">社区管理系统</h1>
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<EventManagement />} />
+          <Route path="/" element={<Index />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/party-members" element={<PartyMemberDetails />} />
+          <Route path="*" element={<Navigate to="/admin" replace />} />
         </Routes>
-      </div>
-    </Router>
-  );
-}
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
