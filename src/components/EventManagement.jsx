@@ -95,7 +95,7 @@ const EventManagement = () => {
               onChange={(e) => setReminderTime(e.target.value)}
             />
             <Button onClick={handleSave} disabled={isSaving}>
-              {isSaving ? '保存中...' : '保存流程'}
+              {isSaving ? '保存中，你别急...' : '保存流程'}
             </Button>
           </div>
         </CardContent>
