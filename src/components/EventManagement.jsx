@@ -2,51 +2,16 @@ import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { saveEvent } from '../services/eventService';
-import { useToast } from "@/components/ui/use-toast";
 
 const EventManagement = () => {
   const [eventName, setEventName] = useState('');
   const [eventScope, setEventScope] = useState('');
   const [timeLimit, setTimeLimit] = useState('');
   const [reminderTime, setReminderTime] = useState('');
-  const [isSaving, setIsSaving] = useState(false);
-  const { toast } = useToast();
 
-  // 处理保存事件流程的函数
-  const handleSave = async () => {
-    // 输入验证
-    if (!eventName || !eventScope || !timeLimit || !reminderTime) {
-      toast({
-        title: "输入无效",
-        description: "请填写所有字段。",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSaving(true);
-    try {
-      const eventData = { eventName, eventScope, timeLimit, reminderTime };
-      await saveEvent(eventData);
-      toast({
-        title: "保存成功",
-        description: "事件处置流程已成功保存到数据库。",
-      });
-      // 清空表单
-      setEventName('');
-      setEventScope('');
-      setTimeLimit('');
-      setReminderTime('');
-    } catch (error) {
-      toast({
-        title: "保存失败",
-        description: "保存事件处置流程时出错，请稍后重试。",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSaving(false);
-    }
+  const handleSave = () => {
+    // 保存事件处置流程的逻辑
+    console.log("保存事件处置流程", { eventName, eventScope, timeLimit, reminderTime });
   };
 
   return (
@@ -80,12 +45,12 @@ const EventManagement = () => {
               value={reminderTime}
               onChange={(e) => setReminderTime(e.target.value)}
             />
-            <Button onClick={handleSave} disabled={isSaving}>
-              {isSaving ? '保存中...' : '保存流程'}
-            </Button>
+            <Button onClick={handleSave}>保存流程</Button>
           </div>
         </CardContent>
       </Card>
+      <div className="mt-4">
+      </div>
     </div>
   );
 };
