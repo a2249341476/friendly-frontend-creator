@@ -75,6 +75,10 @@ const EventManagement = () => {
     }
   };
 
+  useEffect(() => {
+    fetchFlows();
+  }, []);
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">事件中心</h2>
@@ -114,7 +118,7 @@ const EventManagement = () => {
       </Card>
 
       <Button onClick={fetchFlows} className="mt-4">
-        查看存储的数据
+        刷新事件列表
       </Button>
 
       <div className="mt-4">
