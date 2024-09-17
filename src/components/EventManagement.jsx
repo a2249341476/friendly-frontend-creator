@@ -24,14 +24,14 @@ const EventManagement = () => {
         ]);
 
       if (error) throw error;
-      console.log('Event flow saved successfully:', data);
-      // Clear the form after successful save
+      console.log('事件流程保存成功:', data);
+      // 保存成功后清空表单
       setFlowName('');
       setFlowScope('');
       setProcessTimeLimit('');
       setNodeDelayTime('');
     } catch (error) {
-      console.error('Error saving event flow:', error.message);
+      console.error('保存事件流程时出错:', error.message);
     }
   };
 
