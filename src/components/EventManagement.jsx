@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { supabase } from '../lib/supabase';
 
 const EventManagement = () => {
   const [eventName, setEventName] = useState('');
@@ -9,9 +10,31 @@ const EventManagement = () => {
   const [timeLimit, setTimeLimit] = useState('');
   const [reminderTime, setReminderTime] = useState('');
 
-  const handleSave = () => {
-    // 保存事件处置流程的逻辑
-    console.log("保存事件处置流程", { eventName, eventScope, timeLimit, reminderTime });
+  const handleSave = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('event_flows')
+        .insert([
+          {
+            flow_name: eventName,
+            flow_scope: eventScope,
+            process_time_limit: parseInt(timeLimit),
+            node_delay_time: parseInt(reminderTime)
+          }
+        ]);
+
+      if (error) throw error;
+      console.log('Event saved successfully:', data);
+      // 清空表单
+      setEventName('');
+      setEventScope('');
+      setTimeLimit('');
+      setReminderTime('');
+      alert('事件处置流程已保存');
+    } catch (error) {
+      console.error('Error saving event:', error.message);
+      alert('保存失败，请重试');
+    }
   };
 
   return (
@@ -49,8 +72,6 @@ const EventManagement = () => {
           </div>
         </CardContent>
       </Card>
-      <div className="mt-4">
-      </div>
     </div>
   );
 };
