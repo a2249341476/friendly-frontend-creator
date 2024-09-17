@@ -2,16 +2,37 @@ import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { supabase } from '../lib/supabase';
 
 const EventManagement = () => {
-  const [eventName, setEventName] = useState('');
-  const [eventScope, setEventScope] = useState('');
-  const [timeLimit, setTimeLimit] = useState('');
-  const [reminderTime, setReminderTime] = useState('');
+  const [flowName, setFlowName] = useState('');
+  const [flowScope, setFlowScope] = useState('');
+  const [processTimeLimit, setProcessTimeLimit] = useState('');
+  const [nodeDelayTime, setNodeDelayTime] = useState('');
 
-  const handleSave = () => {
-    // 保存事件处置流程的逻辑
-    console.log("保存事件处置流程", { eventName, eventScope, timeLimit, reminderTime });
+  const handleSave = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('event_flows')
+        .insert([
+          { 
+            flow_name: flowName,
+            flow_scope: flowScope,
+            process_time_limit: parseInt(processTimeLimit),
+            node_delay_time: parseInt(nodeDelayTime)
+          }
+        ]);
+
+      if (error) throw error;
+      console.log('Event flow saved successfully:', data);
+      // Clear the form after successful save
+      setFlowName('');
+      setFlowScope('');
+      setProcessTimeLimit('');
+      setNodeDelayTime('');
+    } catch (error) {
+      console.error('Error saving event flow:', error.message);
+    }
   };
 
   return (
@@ -25,32 +46,30 @@ const EventManagement = () => {
           <div className="space-y-4">
             <Input
               placeholder="流程名称"
-              value={eventName}
-              onChange={(e) => setEventName(e.target.value)}
+              value={flowName}
+              onChange={(e) => setFlowName(e.target.value)}
             />
             <Input
               placeholder="事件流转范围"
-              value={eventScope}
-              onChange={(e) => setEventScope(e.target.value)}
+              value={flowScope}
+              onChange={(e) => setFlowScope(e.target.value)}
             />
             <Input
               placeholder="事件整体处置时限（小时）"
               type="number"
-              value={timeLimit}
-              onChange={(e) => setTimeLimit(e.target.value)}
+              value={processTimeLimit}
+              onChange={(e) => setProcessTimeLimit(e.target.value)}
             />
             <Input
               placeholder="节点临期提醒时长（小时）"
               type="number"
-              value={reminderTime}
-              onChange={(e) => setReminderTime(e.target.value)}
+              value={nodeDelayTime}
+              onChange={(e) => setNodeDelayTime(e.target.value)}
             />
             <Button onClick={handleSave}>保存流程</Button>
           </div>
         </CardContent>
       </Card>
-      <div className="mt-4">
-      </div>
     </div>
   );
 };
