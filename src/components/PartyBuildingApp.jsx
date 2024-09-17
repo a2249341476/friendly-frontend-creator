@@ -1,15 +1,8 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useNavigate } from 'react-router-dom';
 
 const PartyBuildingApp = () => {
-  const navigate = useNavigate();
-
-  const handleViewDetails = () => {
-    navigate('/party-members');
-  };
-
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">云党建应用</h2>
@@ -20,7 +13,7 @@ const PartyBuildingApp = () => {
           </CardHeader>
           <CardContent>
             <p>展示党员信息和组织结构</p>
-            <Button onClick={handleViewDetails} className="mt-4">查看党员详情</Button>
+            <Button className="mt-2">查看详情</Button>
           </CardContent>
         </Card>
         <Card>

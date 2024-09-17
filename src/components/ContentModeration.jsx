@@ -6,9 +6,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 const ContentModeration = () => {
   const [autoModeration, setAutoModeration] = useState(false);
   const [comments, setComments] = useState([
-    { id: 1, content: "评论1", application: "邻里达人", status: "待审核" },
-    { id: 2, content: "评论2", application: "幸福学堂", status: "待审核" },
-    { id: 3, content: "评论3", application: "活动报名", status: "待审核" },
+    { id: 1, content: "这是一条评论", application: "邻里达人", status: "待审核" },
+    { id: 2, content: "另一条评论", application: "幸福学堂", status: "待审核" },
   ]);
 
   const handleModeration = (id, action) => {
